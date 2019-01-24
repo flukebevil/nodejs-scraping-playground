@@ -29,9 +29,8 @@ const phone = async link => {
     telephone = $('p.phone')[0].children[0].data
     if (telephone === undefined)
         telephone = $('p.phone')[0].children[0].next.data
-    address = $('h2.address')[0].children[0].data
-    status = $('div.status-text open now')
-    console.log(status)
+    if ($('h2.address')[0].children[0] !== undefined)
+        address = $('h2.address')[0].children[0].data
     businessData.push({ telephone, address })
     return { address, telephone, status }
 }

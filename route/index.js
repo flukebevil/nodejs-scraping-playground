@@ -16,12 +16,13 @@ module.exports = server => {
                 const newModel = new InformationSchema(res)
                 newModel.save()
             })
+            // wait mongo create data
             await sleep(5000)
             // add phone number
             const informationList = await InformationSchema.find()
             informationList.forEach(async eachInformation => {
                 await logic.phone(eachInformation.link).then(async res => {
-                    const result = await InformationSchema.findOneAndUpdate({
+                    await InformationSchema.findOneAndUpdate({
                         _id: eachInformation._id
                     },
                         { $set: { phone: res.telephone, address: res.address } }
