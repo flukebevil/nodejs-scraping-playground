@@ -34,7 +34,7 @@ const phone = async link => {
     if ($('div.time-info')[0].children[0] !== undefined) {
         openToday = $('div.time-info')[0].children[0].next.children[0].data
         if ($('div.time-info')[0].children[0].next.next.children[0].data !== null)
-            openTomorrow = $('div.time-info')[0].children[0].next.next.children[0].data !== null
+            openTomorrow = $('div.time-info')[0].children[0].next.next.children[0].data 
     }
     businessData.push({ telephone, address })
     return { address, telephone, openToday, openTomorrow }
