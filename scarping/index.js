@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 const baseUrl = 'https://www.yellowpages.com'
 const validUrl = require('valid-url')
 const url = baseUrl + '/search?search_terms=printing+services&geo_location_terms=Los+Angeles%2C+CA'
-var name, link, telephone, address, status = ""
+var name, link, telephone, address, openToday, openTomorrow = ""
 const businessData = []
 
 const getCompanies = async () => {
@@ -31,8 +31,13 @@ const phone = async link => {
         telephone = $('p.phone')[0].children[0].next.data
     if ($('h2.address')[0].children[0] !== undefined)
         address = $('h2.address')[0].children[0].data
+    if ($('div.time-info')[0].children[0] !== undefined) {
+        openToday = $('div.time-info')[0].children[0].next.children[0].data
+        if ($('div.time-info')[0].children[0].next.next.children[0].data !== null)
+            openTomorrow = $('div.time-info')[0].children[0].next.next.children[0].data !== null
+    }
     businessData.push({ telephone, address })
-    return { address, telephone, status }
+    return { address, telephone, openToday, openTomorrow }
 }
 
 module.exports = {

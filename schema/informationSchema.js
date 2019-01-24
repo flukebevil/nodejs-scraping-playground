@@ -5,7 +5,9 @@ var informationSchema = new Schema({
     name: String,
     link: String,
     phone: String,
-    address: String
+    address: String,
+    open_today: String,
+    open_tomorrow: String
 })
 
 module.exports = mongoose.model('information', informationSchema)

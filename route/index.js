@@ -16,7 +16,7 @@ module.exports = server => {
                 const newModel = new InformationSchema(res)
                 newModel.save()
             })
-            // wait mongo create data
+            // wait mongo create
             await sleep(5000)
             // add phone number
             const informationList = await InformationSchema.find()
@@ -25,7 +25,14 @@ module.exports = server => {
                     await InformationSchema.findOneAndUpdate({
                         _id: eachInformation._id
                     },
-                        { $set: { phone: res.telephone, address: res.address } }
+                        {
+                            $set: {
+                                phone: res.telephone,
+                                address: res.address,
+                                open_today: res.openToday,
+                                open_tomorrow: res.openTomorrow
+                            }
+                        }
                     ).catch(err => { console.log(err) })
                 }).catch(err => { console.log(err) })
             })
