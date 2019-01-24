@@ -11,13 +11,13 @@ module.exports = server => {
         method: 'POST',
         path: '/',
         handler: async () => {
-            // const data = await logic.getCompanies()
-            // await data.forEach(res => {
-            //     const newModel = new InformationSchema(res)
-            //     newModel.save()
-            // })
-            // await sleep(5000)
-            // add phonenumber
+            const data = await logic.getCompanies()
+            await data.forEach(res => {
+                const newModel = new InformationSchema(res)
+                newModel.save()
+            })
+            await sleep(5000)
+            // add phone number
             const informationList = await InformationSchema.find()
             informationList.forEach(async eachInformation => {
                 await logic.phone(eachInformation.link).then(async res => {

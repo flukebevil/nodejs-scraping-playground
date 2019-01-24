@@ -33,7 +33,7 @@ const phone = async link => {
     status = $('div.status-text open now')
     console.log(status)
     businessData.push({ telephone, address })
-    return { address, telephone,status }
+    return { address, telephone, status }
 }
 
 module.exports = {
